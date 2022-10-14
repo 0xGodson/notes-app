@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Intigriti October Challenge</title>
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@intigriti">
+  <meta name="twitter:creator" content="@intigriti">
+  <meta name="twitter:title" content="October XSS Challenge - Intigriti">
+  <meta name="twitter:description" content="Find the XSS and WIN Intigriti swag.">
+  <meta name="twitter:image" content="https://challenge-1022.intigriti.io/share.jpg">
+  <meta property="og:url" content="https://challenge-1022.intigriti.io">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="October XSS Challenge - Intigriti">
+  <meta property="og:description" content="Find the XSS and WIN Intigriti swag.">
+  <meta property="og:image" content="https://challenge-1022.intigriti.io/share.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="/challenge/style2.css" rel="stylesheet">
+</head>
+<body>
+<section id="wrapper">
+  <section id="rules">
+    <div id="challenge-container" class="card-container">
+      <div class="card-header">
+        <img class="card-avatar" src="/challenge/creator.jpg" alt="creator">
+        Intigriti's October XSS challenge by <a target="_blank" href="https://twitter.com/0xGodson_">@0xGodson_</a>
+      </div>
+      <div id="challenge-info" class="card-content">
+        <p>Find a way to execute arbitrary javascript on the iFramed page and win Intigriti swag.</p>
+        <b>Rules:</b>
+        <ul>
+          <li>This challenge runs from the 17th of October until the 23rd of October, 11:59 PM CET.</li>
+          <li>
+            Out of all correct submissions, we will draw <b>six</b> winners on Monday, the 24th of October:
+            <ul>
+              <li>Three randomly drawn correct submissions</li>
+              <li>Three best write-ups</li>
+            </ul>
+          </li>
+          <li>Every winner gets a €50 swag voucher for our <a href="https://swag.intigriti.com/" target="_blank">swag shop</a></li>
+          <li>The winners will be announced on our <a href="https://twitter.com/intigriti" target="_blank">Twitter profile</a>.</li>
+          <li>For every 100 likes, we'll add a tip to <a href="https://go.intigriti.com/challenge-tips" target="_blank">announcement tweet</a>.</li>
+          <li>Join our <a href="https://go.intigriti.com/discord" target="_blank">Discord</a> to discuss the challenge!</li>
+        </ul>
+        <b>The solution...</b>
+        <ul>
+          <li>Should work on the latest version of <b>FireFox</b></li>
+          <li>Should alert the contents of a note of the victim.</li>
+          <li>Should leverage a cross site scripting vulnerability on this domain.</li>
+          <li>Shouldn't be self-XSS or related to MiTM attacks.</li>
+          <li>Should require minimal user interaction. There should be a page that when visited will present the victim with a popup after a few seconds.</li>
+          <li><b>You may need to use a previous XSS challenge in order to solve this one.</b></li>
+          <li><b>The victim will open your link on a fresh private window after creating an account and a note.</b></li>
+          <li><b>The victim will have popups enabled.</b></li>
+          <li>Should be reported at <a href="https://go.intigriti.com/submit-solution">go.intigriti.com/submit-solution</a>.</li>
+        </ul>
+        <b>Test your payloads down below and <a href="/challenge/begin">on the challenge page here</a>!</b>
+        <p>Let's pop that alert!</p>
+      </div>
+    </div>
+    <div class="card-container">
+      <iframe src="/challenge/begin" width="100%" height="800px"></iframe>
+    </div>
+  </section>
+</section>
+</body>
+</html>

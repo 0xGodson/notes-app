@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Welcome <%- user %></title>
+      <link href="./bootstrap.min.css" rel="stylesheet">
+      <link href="./style.css" rel="stylesheet">
+     <script src="./arg-1.4.js"></script>
+     <user id="user-type" type="normal-user"></user>
+      <script src="./app.js" defer></script>
+   </head>
+   <body className="snippet-body">
+     <br>
+     <div class="container alert alert-success" role="alert" id="main" hidden>
+ </div>
+ <div class="container alert alert-danger" role="alert" id="main" hidden>
+ </div></br>
+      <div class="container" id="main">
+               <div style="padding:2vw">
+                  <div class="row" id="theme-update" style="width:auto">
+                     <div class="col my-5">
+                        <div class="row text-center px-3 mb-3" style="display:block">
+                          <img id="app-logo" src="./noteico.png">
+                        </div>
+                        <div class="row px-3 mb-3 text-center"style="display:block">
+                          <h2 class="mb-5 heading">Secure Notes Application</h2>
+                        </div>
+                          <img id="img-theme" src="./theme.png">
+                        <h3 id="msg-info" class="msg-info">Your Notes!</h3>
+
+                        <ul>
+                              <% if (typeof notes !== "undefined") { %>
+                                <% for (i in notes){%>
+                              <li><a href="/challenge/view/<%=uuid[i]%>"><%=notes[i]%></a></li>
+                              <% } %>
+                              <br><br><br>
+                               <a id='create-note' href='/challenge/create'><b>Create a New Note</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/challenge/auth' id='create-note'><b>Logout</b></a>
+                              <%} else { %>
+                          <br>
+                         
+                              <script src='./notes.js'></script>
+                              <% } %>
+                        </ul>
+                               
+                     </div>
+                  </div>
+         </div>
+      </div>
+
+   </body>
+</html>
+
+<!-- We are OpenSource Now! https://github.com/0xGodson/notes-app-->

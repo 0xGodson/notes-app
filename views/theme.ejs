@@ -1,0 +1,964 @@
+<!-- https://codepen.io/Athul369/pen/JjpOdNO -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>Theme Updater!</title>
+
+  <link rel="stylesheet" media="screen" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-1580f96ce81ff0a427cf57dda2748ce646c38efc201ae5942a29958cffa6856d.css" />
+  
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+    
+
+  <title>Update Theme!</title>
+   <script>
+     function setBackground() {
+        let backgroundTheme = window.result.contentWindow.document.getElementById("HEX").value;
+        top.window.location=`?callback=setTheme&backgroundTheme=${encodeURIComponent(backgroundTheme)}`;
+      }
+     function setColor() {
+        let colorTheme = window.result.contentWindow.document.getElementById("HEX").value;
+        top.window.location=`?callback=setTheme&colorTheme=${encodeURIComponent(colorTheme)}`;
+      }
+  
+  <% if(theme) {%>
+  <%    if(theme.font && theme.background){ %>
+          opener.<%= theme.callback %>("<%= theme.background %>"," <%= theme.font %>")
+        <%} else if(theme.background) {%>
+          opener.<%= theme.callback %>("<%= theme.background %>", "")
+        <%} else if (theme.font){ %>
+          opener.<%= theme.callback %>("","<%= theme.font %>")
+        <% } %>
+<% } %>   
+</script>
+
+
+  <style>
+    html { font-size: 15px; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { height:100%; display: flex; flex-direction: column; }
+    .referer-warning {
+      background: black;
+      box-shadow: 0 2px 5px rgba(0,0,0, 0.5);
+      padding: 0.75em;
+      color: white;
+      text-align: center;
+      font-family: var(--cp-font-family);
+      line-height: 1.2;
+      font-size: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .referer-warning h1 { font-size: 1.2rem; margin: 0; }
+    .referer-warning a { color: #56bcf9; } /* $linkColorOnBlack */
+  </style>
+</head>
+
+<body class="">
+
+  <div id="result-iframe-wrap" role="main">
+
+    <iframe
+      id="result"
+      sandbox="allow-scripts allow-same-origin"
+      srcdoc="
+<!DOCTYPE html>
+<html lang=&quot;en&quot; >
+
+<head>
+
+  <meta charset=&quot;UTF-8&quot;>
+  
+<link rel=&quot;apple-touch-icon&quot; type=&quot;image/png&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png&quot; />
+<meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;CodePen&quot;>
+
+<link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico&quot; />
+
+<link rel=&quot;mask-icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg&quot; color=&quot;#111&quot; />
+
+
+  <title>CodePen - RGB Color Picker</title>
+  
+  
+  
+  
+<style>
+:root {
+  --tlC: #fff; /*Text light Color*/
+  --tdC: #000; /*Text dark Color*/
+  --cilC: green; /*Copy Info Left Color*/
+  --bgC: #fffff0; /*background color*/
+  --CBS: 0 0 10px #6200ff; /*Container Box Shadow*/
+  --cbS: 0 0 6px #6200ff; /* Color box shadow*/
+  --bbS: 0 0 3px #6200ff; /*box border shadow*/
+  --btnS: 0 0 3px #6200ff; /*button shadow*/
+  --fontA: &quot;Noto Sans&quot;, sans-serif;
+  --fontB: &quot;Fira Mono&quot;, monospace;
+}
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+button {
+  border: 0;
+  outline: 0;
+}
+/*
+body {
+  width: 100%;
+  height: 100vh;
+  
+  align-items: center;
+  background-image: linear-gradient(-45deg, #6200ff, #8d00ff, #6200ff, #62ffff);
+  background-size: 400% 400%;
+  -webkit-animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;
+}
+*/
+
+body {
+  display: flex;
+  color: #000;
+  justify-content: center;
+  
+  height: 500%;
+  background-image: linear-gradient(to right, #D500F8, #FFD54F);
+  /* background-repeat: no-repeat; */
+}
+
+
+      
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* Container */
+div.container {
+  position: relative;
+  width: 360px;
+  background: var(--bgC);
+  height: autopx;
+  align-items: center;
+  border-radius: 15px 50px;
+  border: 1px solid #6200ff;
+  padding: 20px;
+  margin: 15px;
+  -webkit-box-shadow: var(--CBS);
+  box-shadow: var(--CBS);
+}
+
+div.container h3.title {
+  font-size: 1.75rem;
+  margin: 10px 5px;
+  margin-bottom: 30px;
+  color: var(--tdC);
+  font-family: var(--fontA);
+}
+
+#HEX {
+  border: 1px solid #6200ff;
+  border-radius: 8px;
+  width: 100%;
+  height: 35px;
+  background: transparent;
+  padding: 8px 4px;
+  outline: none;
+  font-size: 18px;
+  text-align: center;
+  font-family: var(--fontB);
+  -webkit-box-shadow: var(--bbS);
+  box-shadow: var(--bbS);
+}
+
+#RGB {
+  position: relative;
+  border: 1px solid #6200ff;
+  border-radius: 8px;
+  width: 100%;
+  height: 35px;
+  background: transparent;
+  padding: 8px 4px;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+  -webkit-box-shadow: var(--bbS);
+  box-shadow: var(--bbS);
+  font-family: var(--fontB);
+}
+
+div.color {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.colorBox {
+  position: relative;
+  height: autopx;
+  width: autopx;
+  right: 10px;
+  padding: 4px;
+  background-color: transparent;
+}
+
+.opBox {
+  position: relative;
+  height: 100%;
+  width: 200%;
+  background-color: transparent;
+  top: -5px;
+}
+
+#color {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 15px 35px 15px 35px;
+  border: 2px solid #6200ff;
+  -webkit-box-shadow: var(--cbS);
+  box-shadow: var(--cbS);
+}
+.btnBox {
+  position: relative;
+  display: flex;
+  width: autopx;
+  background-color: transparent;
+}
+/*Copy Info*/
+.Copy__info1 {
+  position: absolute;
+  font-size: 0.6rem;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  -webkit-transform: translateY(200%);
+  transform: translateY(200%);
+  opacity: 0;
+}
+
+.Copy__info1.left1 {
+  position: relative;
+  top: 33px;
+  left: 5px;
+  color: var(--cilC);
+  opacity: 0;
+}
+
+.Copy__info2 {
+  position: absolute;
+  font-size: 0.6rem;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  -webkit-transform: translateY(200%);
+  transform: translateY(200%);
+  opacity: 0;
+}
+
+.Copy__info2.left2 {
+  position: relative;
+  top: 33px;
+  left: 5px;
+  color: var(--cilC);
+  opacity: 0;
+}
+
+/* Slider 1 */
+.sliderR {
+  position: relative;
+  width: 100%;
+  height: calc(65px - 10px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: transparent;
+  border-radius: 8px;
+  margin: 5px 0;
+}
+
+.sliderR::before,
+.sliderR::after {
+  position: absolute;
+  color: #a5abc0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.sliderR::before {
+  content: &quot;R&quot;;
+  position: absolute;
+  left: 16px;
+  top: 19px;
+  font-variant-numeric: tabular-nums;
+  color: red;
+  font-weight: 450;
+  font-size: 0.8rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sliderR .pct__textR::after {
+  content: attr(R-pct) &quot;%&quot;;
+  position: absolute;
+  right: 0px;
+  top: 19px;
+  font-variant-numeric: tabular-nums;
+  color: red;
+  font-weight: 450;
+  font-size: 0.8rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#Red {
+  -webkit-appearance: none;
+  width: calc(100% - (70px));
+  height: 2px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.314);
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+#Red::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 4px solid red;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+}
+
+#Red::-webkit-slider-thumb:hover {
+  background: red;
+  border: 4px solid white;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  box-shadow: 0 0 2px #000;
+}
+
+#Red::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+
+#Red::-moz-range-thumb:hover {
+  background: #d4d4d4;
+}
+
+/* Slider 2 */
+.sliderG {
+  position: relative;
+  width: 100%;
+  height: calc(65px - 10px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: transparent;
+  border-radius: 8px;
+  margin: 5px 0;
+}
+
+.sliderG::before,
+.sliderG::after {
+  position: absolute;
+  color: #a5abc0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.sliderG::before {
+  content: &quot;G&quot;;
+  position: absolute;
+  left: 16px;
+  top: 19px;
+  font-variant-numeric: tabular-nums;
+  color: green;
+  font-weight: 450;
+  font-size: 0.8rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sliderG .pct__textG::after {
+  content: attr(G-pct) &quot;%&quot;;
+  position: absolute;
+  right: 0px;
+  top: 19px;
+  font-variant-numeric: tabular-nums;
+  color: green;
+  font-weight: 450;
+  font-size: 0.8rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#Green {
+  -webkit-appearance: none;
+  width: calc(100% - (70px));
+  height: 2px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.314);
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+#Green::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 4px solid green;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+}
+
+#Green::-webkit-slider-thumb:hover {
+  background: green;
+  border: 4px solid white;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  box-shadow: 0 0 2px #000;
+}
+
+#Green::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+
+#Green::-moz-range-thumb:hover {
+  background: #d4d4d4;
+}
+
+/* Slider 3 */
+.sliderB {
+  position: relative;
+  width: 100%;
+  height: calc(65px - 10px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: transparent;
+  border-radius: 8px;
+  margin: 5px 0;
+}
+
+.sliderB::before,
+.sliderB::after {
+  position: absolute;
+  color: #a5abc0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.sliderB::before {
+  content: &quot;B&quot;;
+  position: absolute;
+  left: 16px;
+  top: 19px;
+  font-variant-numeric: tabular-nums;
+  color: blue;
+  font-weight: 450;
+  font-size: 0.8rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sliderB .pct__textB::after {
+  content: attr(B-pct) &quot;%&quot;;
+  position: absolute;
+  right: 0px;
+  top: 19px;
+  font-variant-numeric: tabular-nums;
+  color: blue;
+  font-weight: 450;
+  font-size: 0.8rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#Blue {
+  -webkit-appearance: none;
+  width: calc(100% - (70px));
+  height: 2px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.314);
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+#Blue::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 4px solid blue;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+}
+
+#Blue::-webkit-slider-thumb:hover {
+  background: blue;
+  border: 4px solid white;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  box-shadow: 0 0 2px #000;
+}
+
+#Blue::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+
+#Blue::-moz-range-thumb:hover {
+  background: #d4d4d4;
+}
+/*Button Hex*/
+.btn.hex {
+  position: relative;
+  width: 45%;
+  height: 40px;
+  margin: 25px 0;
+  margin-left: 8px;
+  border-radius: 60px;
+  color: var(--tlC);
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-image: linear-gradient(-45deg, #6200ff, #628bff, #6200ff, #62ffff);
+  background-size: 400% 400%;
+  -webkit-animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;
+  -webkit-transition: all 150ms ease;
+  transition: all 150ms ease;
+  -webkit-box-shadow: var(--btnS);
+  box-shadow: var(--btnS);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+}
+
+.btn.hex:active {
+  -webkit-transform: translateY(-3%);
+  transform: translateY(-3%);
+  -webkit-box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
+}
+
+.btn.hex:hover {
+  background: linear-gradient(to bottom, #6200ff 0%, #ffffff 100%);
+  border: 1px solid #6200ff;
+  color: var(--tlC);
+}
+/* Button Rgb */
+.btn.rgb {
+  position: relative;
+  width: 45%;
+  height: 40px;
+  margin: 25px 0;
+  margin-left: 8px;
+  border-radius: 60px;
+  color: var(--tlC);
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-image: linear-gradient(-45deg, #6200ff, #628bff, #6200ff, #62ffff);
+  background-size: 400% 400%;
+  -webkit-animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;
+  -webkit-transition: all 150ms ease;
+  transition: all 150ms ease;
+  -webkit-box-shadow: var(--btnS);
+  box-shadow: var(--btnS);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+}
+
+.btn.rgb:active {
+  -webkit-transform: translateY(-3%);
+  transform: translateY(-3%);
+  -webkit-box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
+}
+
+.btn.rgb:hover {
+  background: linear-gradient(to bottom, #6200ff 0%, #ffffff 100%);
+  border: 1px solid #6200ff;
+  color: var(--tlC);
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage(&quot;resize&quot;, &quot;*&quot;);
+  }
+</script>
+
+
+</head>
+
+<body translate=&quot;no&quot; >
+  <div class=&quot;container&quot;>
+  <h3 class=&quot;title&quot;> RGB Color Picker</h3>
+  <div class=&quot;color&quot;>
+
+    <div class=&quot;colorBox&quot;>
+      <div id=&quot;color&quot;></div>
+    </div>
+
+    <div class=&quot;opBox&quot;>
+
+      <div class=&quot;Copy__info1 left1&quot;>Copied !</div>
+
+      <textarea readonly id=&quot;HEX&quot;>HEX Value</textarea>
+
+      <div class=&quot;Copy__info2 left2&quot;>Copied !</div>
+
+      <textarea readonly id=&quot;RGB&quot;>RGB Value</textarea>
+
+    </div>
+
+  </div>
+
+  <!---[ Slider]--->
+  <div class=&quot;sliderR&quot;>
+    <div class=&quot;pct__textR&quot; data-pct=&quot;0&quot;> </div>
+    <input class=&quot;slider&quot; id=&quot;Red&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;255&quot; value=&quot;98&quot; />
+  </div>
+
+  <!---[ Slider]--->
+  <div class=&quot;sliderG&quot;>
+    <div class=&quot;pct__textG&quot; data-pct=&quot;0&quot;> </div>
+    <input class=&quot;slider&quot; id=&quot;Green&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;255&quot; value=&quot;0&quot; />
+  </div>
+
+  <!---[ Slider]--->
+  <div class=&quot;sliderB&quot;>
+    <div class=&quot;pct__textB&quot; data-pct=&quot;0&quot;> </div>
+    <input class=&quot;slider&quot; id=&quot;Blue&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;255&quot; value=&quot;255&quot; />
+  </div>
+
+  <div class=&quot;btnBox&quot;>
+    <button type=&quot;submit&quot; class=&quot;btn hex&quot; id=&quot;copy-btn0&quot; onclick=&quot;return top.setBackground()&quot;>Set Background</button>
+    <button type=&quot;submit&quot; class=&quot;btn rgb&quot; id=&quot;copy-btn1&quot; onclick=&quot;return top.setColor()&quot;>Set Font Color</button>
+  </div>
+</div>
+    <script src=&quot;https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js&quot;></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+      <script id=&quot;rendered-js&quot; >
+//By ATHUL P.S
+//R G B Color generator Tool.
+//Variable declaration
+var Color = document.getElementById(&quot;color&quot;);
+var RGB = document.getElementById(&quot;RGB&quot;);
+var HEX = document.getElementById(&quot;HEX&quot;);
+var Rslider = document.getElementById(&quot;Red&quot;);
+var Gslider = document.getElementById(&quot;Green&quot;);
+var Bslider = document.getElementById(&quot;Blue&quot;);
+var colorR = Rslider.value;
+var colorG = Gslider.value;
+var colorB = Bslider.value;
+//slider selectors
+const sliderR = document.querySelector(&quot;.sliderR&quot;);
+const sliderValueR = document.querySelector(&quot;.pct__textR&quot;);
+const sliderG = document.querySelector(&quot;.sliderG&quot;);
+const sliderValueG = document.querySelector(&quot;.pct__textG&quot;);
+const sliderB = document.querySelector(&quot;.sliderB&quot;);
+const sliderValueB = document.querySelector(&quot;.pct__textB&quot;);
+//slider properties
+const sRprops = { bg: &quot;#e89090&quot;, fill: &quot;red&quot; };
+const sGprops = { bg: &quot;#62b362&quot;, fill: &quot;green&quot; };
+const sBprops = { bg: &quot;#7a7aff&quot;, fill: &quot;blue&quot; };
+
+//Slider 1
+//Using Event Listener to apply, the fill and also change the value of the text
+sliderR.querySelector(&quot;#Red&quot;).addEventListener(&quot;input&quot;, event => {
+  sliderValueR.setAttribute(&quot;R-pct&quot;, event.target.value);
+  sRfill(event.target);
+});
+//Selecting the range input and passing it in the Fill function.
+sRfill(sliderR.querySelector(&quot;#Red&quot;));
+
+//This function is responsible to create the trailing color and setting the fill.
+function sRfill(sliderR) {
+  const PCT =
+  100 * (sliderR.value - sliderR.min) / (sliderR.max - sliderR.min);
+  const BG = `linear-gradient(90deg, ${sRprops.fill} ${PCT}%, ${sRprops.bg} ${
+  PCT + 0.1
+  }%)`;
+  sliderR.style.background = BG;
+  sliderValueR.setAttribute(&quot;R-pct&quot;, sliderR.value);
+}
+//Slider 2
+//Using Event Listener to apply, the fill and also change the value of the text.
+sliderG.querySelector(&quot;#Green&quot;).addEventListener(&quot;input&quot;, event => {
+  sliderValueG.setAttribute(&quot;G-pct&quot;, event.target.value);
+  sGfill(event.target);
+});
+//Selecting the range input and passing it in the Fill function.
+sGfill(sliderG.querySelector(&quot;#Green&quot;));
+
+//This function is responsible to create the trailing color and setting the fill.
+function sGfill(sliderG) {
+  const PCT =
+  100 * (sliderG.value - sliderG.min) / (sliderG.max - sliderG.min);
+  const BG = `linear-gradient(90deg, ${sGprops.fill} ${PCT}%, ${sGprops.bg} ${
+  PCT + 0.1
+  }%)`;
+  sliderG.style.background = BG;
+  sliderValueG.setAttribute(&quot;G-pct&quot;, sliderG.value);
+}
+
+//Slider 3
+//Using Event Listener to apply, the fill and also change the value of the text.
+sliderB.querySelector(&quot;#Blue&quot;).addEventListener(&quot;input&quot;, event => {
+  sliderValueB.setAttribute(&quot;B-pct&quot;, event.target.value);
+  sBfill(event.target);
+});
+//Selecting the range input and passing it in the Fill function.
+sBfill(sliderB.querySelector(&quot;#Blue&quot;));
+
+//This function is responsible to create the trailing color and setting the fill.
+function sBfill(sliderB) {
+  const PCT =
+  100 * (sliderB.value - sliderB.min) / (sliderB.max - sliderB.min);
+  const BG = `linear-gradient(90deg, ${sBprops.fill} ${PCT}%, ${sBprops.bg} ${
+  PCT + 0.1
+  }%)`;
+  sliderB.style.background = BG;
+  sliderValueB.setAttribute(&quot;B-pct&quot;, sliderB.value);
+}
+//Slide to change color
+var Sliders = document.getElementsByClassName(&quot;slider&quot;);
+for (let i = 0; i < Sliders.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+  Sliders[i].addEventListener(&quot;input&quot;, () => {
+    changeColor(Sliders[i].id);
+  });
+}
+//Initial rendering for the Color Box and  Slider Switching
+window.CP.exitedLoop(0);Color.style.background = `rgb(${colorR}, ${colorG}, ${colorB})`;
+RGB.innerHTML = `rgb(${colorR}, ${colorG}, ${colorB})`;
+HEX.innerHTML = rgbToHex(colorR, colorG, colorB);
+document.addEventListener(&quot;click&quot;, function () {});
+
+function changeColor(SlidersId) {
+  switch (SlidersId) {
+    case &quot;Red&quot;:
+      colorR = Rslider.value;
+      //Copied info Hide function
+      copiedInfo1.style.transform = &quot;translateY(200%)&quot;;
+      copiedInfo1.style.opacity = &quot;0&quot;;
+      copiedInfo2.style.transform = &quot;translateY(200%)&quot;;
+      copiedInfo2.style.opacity = &quot;0&quot;;
+      bR1.style.borderColor = &quot;#6200ff&quot;;
+      bR2.style.borderColor = &quot;#6200ff&quot;;
+      bR1.style.boxShadow = &quot;0 0 3px #6200ff&quot;;
+      bR2.style.boxShadow = &quot;0 0 3px #6200ff&quot;;
+      //Click to Change Copy button Text
+      $(&quot;#copy-btn0&quot;).text(&quot;Set Background&quot;);
+      $(&quot;#copy-btn1&quot;).text(&quot;Set Font Color&quot;);
+      break;
+    case &quot;Green&quot;:
+      colorG = Gslider.value;
+      //Copied info Hide function
+      copiedInfo1.style.transform = &quot;translateY(200%)&quot;;
+      copiedInfo1.style.opacity = &quot;0&quot;;
+      copiedInfo2.style.transform = &quot;translateY(200%)&quot;;
+      copiedInfo2.style.opacity = &quot;0&quot;;
+      bR1.style.borderColor = &quot;#6200ff&quot;;
+      bR2.style.borderColor = &quot;#6200ff&quot;;
+      bR1.style.boxShadow = &quot;0 0 3px #6200ff&quot;;
+      bR2.style.boxShadow = &quot;0 0 3px #6200ff&quot;;
+      //Click to Change Copy button Text
+      $(&quot;#copy-btn0&quot;).text(&quot;Set Background&quot;);
+      $(&quot;#copy-btn1&quot;).text(&quot;Set Font Color&quot;);
+      break;
+    default:
+      colorB = Bslider.value;
+      //Copied info Hide function
+      copiedInfo1.style.transform = &quot;translateY(200%)&quot;;
+      copiedInfo1.style.opacity = &quot;0&quot;;
+      copiedInfo2.style.transform = &quot;translateY(200%)&quot;;
+      copiedInfo2.style.opacity = &quot;0&quot;;
+      bR1.style.borderColor = &quot;#6200ff&quot;;
+      bR2.style.borderColor = &quot;#6200ff&quot;;
+      bR1.style.boxShadow = &quot;0 0 3px #6200ff&quot;;
+      bR2.style.boxShadow = &quot;0 0 3px #6200ff&quot;;
+      //Click to Change Copy button Text
+      $(&quot;#copy-btn0&quot;).text(&quot;Set Background&quot;);
+      $(&quot;#copy-btn1&quot;).text(&quot;Set Font Color&quot;);}
+
+  Color.style.background = `rgb(${colorR}, ${colorG}, ${colorB})`;
+  RGB.innerHTML = `rgb(${colorR}, ${colorG}, ${colorB})`;
+  HEX.innerHTML = rgbToHex(colorR, colorG, colorB);
+}
+//Color to Hex Convert
+function colorToHex(rgb) {
+  var hex = Number(rgb).toString(16);
+  if (hex.length < 2) {
+    hex = &quot;0&quot; + hex;
+  }
+  return hex;
+}
+//RGB to HEX Convert
+function rgbToHex(r, g, b) {
+  var R = colorToHex(r);
+  var G = colorToHex(g);
+  var B = colorToHex(b);
+  return `#${R}${G}${B}`;
+}
+//border Colours initialisation
+const bR1 = document.getElementById(&quot;HEX&quot;);
+const bR2 = document.getElementById(&quot;RGB&quot;);
+//Text1 appear after copy button is clicked
+const copiedInfo1 = document.querySelector(&quot;.Copy__info1.left1&quot;);
+//Text2 appear after copy button is clicked
+const copiedInfo2 = document.querySelector(&quot;.Copy__info2.left2&quot;);
+
+//Copy Button Click to Change Text Function
+$(&quot;#copy-btn0&quot;).on(&quot;click&quot;, () => {
+  $(&quot;#copy-btn0&quot;).text(&quot;Updated!&quot;);
+});
+$(&quot;#copy-btn1&quot;).on(&quot;click&quot;, () => {
+  $(&quot;#copy-btn1&quot;).text(&quot;Updated!&quot;);
+});
+//# sourceURL=pen.js
+    </script>
+
+  
+
+</body>
+
+</html>
+ 
+"
+      sandbox="allow-forms allow-modals allow-pointer-lock allow-popups  allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" allowTransparency="true"
+      allowpaymentrequest="true" allowfullscreen="true" class="result-iframe">
+      </iframe>
+
+    
+
+  </div>
+</body>
+</html>

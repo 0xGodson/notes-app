@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Welcome <%- user %></title>
+      <link href="../bootstrap.min.css" rel="stylesheet">
+      <link href="../style.css" rel="stylesheet">
+     <script nonce="<%= nonce %>" src="../arg-1.4.js"></script>
+     <script nonce="<%= nonce %>" src="../app.js" defer></script>
+     <!-- Todo: Download the Marked.js lib and store that locally for future use, then Remove the Nonce Based CSP-->
+     <script nonce="<%= nonce %>" src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.1.1/marked.min.js"></script>
+   </head>
+   <body id="usertype" type="normal-user" className="snippet-body">
+     <br>
+     <div class="container alert alert-success" role="alert" id="main" hidden>
+</div>
+<div class="container alert alert-danger" role="alert" id="main" hidden>
+</div></br>
+      <div class="container" id="main">
+               <div style="padding:2vw">
+                   <div class="row" id="theme-update" style="width:auto">
+
+<div class="col my-5">
+                        <div class="row text-center px-3 mb-3" style="display:block">
+                          <img id="app-logo" src="../noteico.png">
+                        </div>
+                        <div class="row px-3 mb-3 text-center"style="display:block">
+                          <h2 class="mb-5 heading">Secure Notes Application</h2>
+                          <img id="img-theme" src="../theme.png">
+                        </div>
+                        <h2 class="msg-info"><%= title%></h2><br>
+                        <div id="noteContent" class="form-group">
+                            <%- body %>
+                     </div>
+                  </div>
+         </div>
+      </div>
+      </script>
+      <script nonce="<%= nonce %>" defer>
+         // under Construction :/ 
+         let tryMarkDown = function(){
+             var text = document.getElementById("noteContent").innerHTML
+             if(text.indexOf("<mk>") > 0){
+                 markdown = text.slice(text.indexOf("<mk>")+4,text.indexOf("</mk>"))
+                 var parsed = marked.parse(markdown);
+                 parsed = parsed.replace("<","").replace(">","");
+                 domContent = text.replace(text, parsed);
+                 document.getElementById("noteContent").innerHTML = domContent;
+             }
+         }
+         window.addEventListener('DOMContentLoaded', function() {
+            if(document.querySelectorAll("#usertype")[0].getAttribute("type") === "admin" && Object.whoami.type === "admin" && Object.whoami.markdown === true && Object.type === "admin" ){
+               tryMarkDown()
+            }
+         }, false);
+         
+      </script>
+   </body>
+</html>
+
+<!-- We are OpenSource Now! https://github.com/0xGodson/notes-app-->

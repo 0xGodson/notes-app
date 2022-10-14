@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login / Signup</title>
+    <link href="./bootstrap.min.css" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+   <script src="./arg-1.4.js"></script>
+   <user id="user-type" type="normal-user"></user>
+    <script src="./app.js" defer></script>
+ </head>
+   <body className="snippet-body">
+     <br>
+     <div class="container alert alert-success" role="alert" id="main" name="msg-success" hidden>
+</div>
+<div class="container alert alert-danger" name="msg-alert" role="alert" id="main" hidden>
+</div></br>
+      <div class="container" id="main">
+               <div style="padding:2vw">
+                  <div class="row" id="theme-update" style="width:auto">
+                     <div class="col my-5">
+                        <div class="row text-center px-3 mb-3" style="display:block">
+                          <img id="app-logo" src="./noteico.png">
+                        </div>
+                        <div class="row px-3 mb-3 text-center"style="display:block">
+                          <h2 class="mb-5 heading">Secure Notes Application - Login/Register</h2>
+                          <img id="img-theme" src="./theme.png">
+                        </div>
+
+                     <div class="form-group">
+                        <form action="/challenge/auth" method="post">
+                          <label class="form-control-label text-muted">Username</label>
+                          <input type="text" id="username" name="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label class="form-control-label text-muted">Password</label>
+                          <input id="psw" name="password" class="form-control"></input>
+                        </div>
+                        <div class="row justify-content-center my-1 px-3">
+                          <button class="btn-block btn-color">Login / Signup</button>
+                        </div>
+                      </form>
+                     </div>
+                  </div>
+         </div>
+      </div>
+   </body>
+</html>
+
+<!-- We are OpenSource Now! https://github.com/0xGodson/notes-app-->
