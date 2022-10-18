@@ -63,6 +63,19 @@ isAuthed = async (req, res, next) => {
     }
 }
 
+// no xss :)
+
+function noscript(text) {
+    matches = text.toLowerCase().match(/(script)|(nonce)|(href)|(getsecret)|(ip-secret)|(form)|(input)|(nonce)/)
+    if(matches === null){
+        return text
+    }else{
+        return "[NO XSS]"
+    }
+}
+
+
+
 app.get('/',  (req, res) => {
     res.sendFile(path.join(__dirname, './static', 'start.html'));
 })
@@ -118,7 +131,7 @@ app.post('/challenge/auth',  (req, res) => {
             if (db.users[req.body.username]['ip'] === RequestIp.getClientIp(req)) {
                 const authToken = jwt.sign({user: req.body.username}, jwtSecret)
                 res.setHeader('Set-Cookie', [`jwt=${authToken}; HttpOnly; secure; SameSite=Strict`]);
-                return res.redirect('/challenge/begin?message=Login Success!');
+                return res.redirect('/challenge/begin?message=Login Success! NOTE: WE FIXED A UNINTENDED SOLUTION NOW AND THE NEW CODE IS UPDATED IN THE GITHUB REPO ASWELL!');
             } else {
                 return res.redirect('/challenge/auth?alert=Illegal Access!');
             }
@@ -137,7 +150,7 @@ app.post('/challenge/auth',  (req, res) => {
         const authToken = jwt.sign({user: req.body.username}, jwtSecret);
         db.users[req.body.username].posts = [];
         res.setHeader('Set-Cookie', [`jwt=${authToken}; HttpOnly; secure; SameSite=Strict`]);
-        res.redirect('/challenge/begin?message=Account Created!');
+        res.redirect('/challenge/begin?message=Account Created! NOTE: WE FIXED A UNINTENDED SOLUTION NOW AND THE NEW CODE IS UPDATED IN THE GITHUB REPO ASWELL!');
     } catch {
         res.redirect('/challenge/begin?alert=Something went Wrong');
     }
@@ -157,9 +170,9 @@ app.get('/challenge/begin',  isAuthed, (req, res) => {
             for (let i in posts) {
                 titles.push(db.users[currentUser][posts[i]]['title']);
             }
-            return res.render('index', {user: currentUser, notes: titles, uuid: posts});
+            return res.render('index', {user: noscript(currentUser), notes: titles, uuid: posts});
         } else {
-            res.render('index', {user: currentUser});
+            res.render('index', {user: noscript(currentUser)});
         }
     } catch (e) {
         res.redirect('/challenge/begin?alert=Something went Wrong');
@@ -172,7 +185,7 @@ app.get('/challenge/create',  isAuthed, (req, res) => {
         if (db.users[currentUser]['ip'] !== userIP) {
             return res.redirect('/challenge/auth?alert=Illegal Access!');
         }
-        res.render('note', {user: currentUser});
+        res.render('note', {user: noscript(currentUser)});
     } catch {
         res.redirect('/challenge/begin?alert=Something went Wrong');
     }
@@ -214,10 +227,6 @@ app.post('/challenge/add',  isAuthed, (req, res) => {
 })
 
 app.get('/challenge/view/:uuid',  isAuthed, (req, res) => {
-    // no xss :)
-    function noscript(text) {
-        return text.toLocaleLowerCase().replaceAll('script', '').replaceAll('nonce', '');
-    }
 
     try {
         if (db.users[currentUser]['ip'] !== userIP) {
